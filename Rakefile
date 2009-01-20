@@ -139,7 +139,6 @@ subdir 'ext/apache2' do
 
 	desc "Build mod_passenger Apache 2 module"
 	task :apache2 => ['mod_passenger.so', 'ApplicationPoolServerExecutable', :native_support]
-	
 	file 'mod_passenger.so' => [
 		'../libboost_oxt.a',
 		'mod_passenger.o'
@@ -151,6 +150,7 @@ subdir 'ext/apache2' do
 		#
 		# Oh, and libtool sucks too. Do we even need it anymore in 2008?
 		linkflags = "#{LDFLAGS} #{MULTI_ARCH_FLAGS}"
+               
 		linkflags << " -lstdc++ -lpthread " <<
 			"../libboost_oxt.a " <<
 			APR_LIBS
@@ -179,6 +179,11 @@ subdir 'ext/apache2' do
 	end
 	
 	file 'mod_passenger.o' => ['mod_passenger.c'] do
+                puts "OPTIMIZATION FLAGS = #{OPTIMIZATION_FLAGS}"
+                puts "APR_FLAGS = #{APR_FLAGS}"
+                puts "APU_FLAGS = #{APU_FLAGS}"
+                puts "APXS2_FLAGS = #{APXS2_FLAGS}"
+                puts "CXXFLAGS = #{CXXFLAGS}"
 		compile_c 'mod_passenger.c', APACHE2::CXXFLAGS
 	end
 	
