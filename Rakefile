@@ -179,11 +179,6 @@ subdir 'ext/apache2' do
 	end
 	
 	file 'mod_passenger.o' => ['mod_passenger.c'] do
-                puts "OPTIMIZATION FLAGS = #{OPTIMIZATION_FLAGS}"
-                puts "APR_FLAGS = #{APR_FLAGS}"
-                puts "APU_FLAGS = #{APU_FLAGS}"
-                puts "APXS2_FLAGS = #{APXS2_FLAGS}"
-                puts "CXXFLAGS = #{CXXFLAGS}"
 		compile_c 'mod_passenger.c', APACHE2::CXXFLAGS
 	end
 	
